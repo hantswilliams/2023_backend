@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id    Int     @id @default(autoincrement())
+  uuidv4 String? @unique // this is the uuidv4 of the user
+  email String?  @unique
+  isDisabled Boolean? @default(false)
+  dateCreated DateTime? @default(now())
+  dateModified DateTime? @default(now())
+  dateLastLogin DateTime? @default(now())
+  instagram Instagram[]
+}
+
+
+model Instagram {
+  id    Int     @id @default(autoincrement())
+  user Users @relation(fields: [userId], references: [uuidv4]) 
+  userId String // this is the user id of the user that added this account
+  igaccountRelationship String? @default("owner") // this is the relationship of the user to the instagram account (owner, parent, friend, etc...)
+  igusername  String? @unique // this is the instagram username
+  igoauthid String? // this is the instagram oauth id
+  igtoken String? // this is the instagram token
+  iguserid String? // this is the id of the instagram user 
+  igmediacount String? // this is the provided count of media from instagram
+  igaccounttype String? // this is the account type of the instagram user
+  medias Media[]
+}
+
+model Media {
+  id        Int     @id @default(autoincrement())
+  media_uid String? @unique // this is the image uid of the media
+  media_type String? // this is the type of media (image, video, etc...)
+  origin    String? 
+  medial_url String? @db.Text // set max length to 1000 
+  s3bucket_key String? @db.Text // set max length to 1000
+  permalink String?
+  title     String?
+  content   String?
+  author    Instagram    @relation(fields: [authorId], references: [igusername])
+  authorId  String
+  timestampMedia DateTime? 
+  cognitions Cognition[] // this is the media that was analyzed for this specific user 
+}
+
+model Cognition {
+  id        Int     @id @default(autoincrement())
+  model     String?  // this should be a value like google, clarifai, nanonets, sightengine 
+  modelsubtype String? // this should be a value like google_vision, clarifai_general, nanonets_object, sightengine_nudity
+  output    Json? // this is the output of the model
+  outputcleaned Json? // this is the output of the model cleaned up
+  media     Media   @relation(fields: [mediaId], references: [media_uid]) // this is the media that was analyzed
+  mediaId   String // this is the media that was analyzed
+}

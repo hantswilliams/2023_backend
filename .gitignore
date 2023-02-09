@@ -1,0 +1,7 @@
+.env 
+
+# ignore pgdata folder (psql backup for local)
+pgdata
+
+# node_modules
+node_modules
