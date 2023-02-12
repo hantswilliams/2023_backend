@@ -59,13 +59,26 @@ services:
     container_name: swagger-ui
     image: swaggerapi/swagger-ui:latest
     ports:
-      - "8080:8080"
+      - "8083:8080"
     environment:
       - API_URL=http://localhost:3000/
+    labels:
+      # This is enableing treafik to proxy this service
+      - "traefik.enable=true"
+      # Here we have to define the URL
+      - "traefik.http.routers.swagger.rule=Host(`myproject.localhost`)"
+      # Here we are defining wich entrypoint should be used by clients to access this service
+      - "traefik.http.routers.swagger.entrypoints=web"
+      # Here we define in wich network treafik can find this service
+      - "traefik.docker.network=web"
+      # This is the port that traefik should proxy
+      - "traefik.http.services.swagger.loadbalancer.server.port=80"
     restart: always
     depends_on:
       - postgrest
       - postgrest-db
+    networks:
+      - web
 
 volumes:
   pgdata:
@@ -73,3 +86,5 @@ volumes:
 networks:
   postgrest-backend:
     driver: bridge
+  web:
+    external: true
