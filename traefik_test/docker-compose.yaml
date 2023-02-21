@@ -11,7 +11,7 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=godaddy"
+      # - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=godaddy"
       - "--certificatesresolvers.myresolver.acme.email=hantsawilliams@gmail.com"
     ports:
       - "80:80"
