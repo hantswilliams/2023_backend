@@ -44,4 +44,4 @@
         url = "http://34.170.61.70:80"
     [http.services.database.loadBalancer]
       [[http.services.database.loadBalancer.servers]]
-        url = "http://34.170.61.70:80"
+        url = "http://34.29.211.127:80"
