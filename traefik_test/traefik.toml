@@ -20,17 +20,17 @@
 [http]
   [http.routers]
     [http.routers.socialcomprehend]
-      rule = "Host(`socialcomprehend.com`)"
+      rule = "Host(`hantswilliams.com`)"
       service = "socialcomprehend"
       [http.routers.socialcomprehend.tls]
         certResolver = "le"
     [http.routers.api]
-      rule = "Host(`api.socialcomprehend.com`)"
+      rule = "Host(`api.hantswilliams.com`)"
       service = "api"
       [http.routers.api.tls]
         certResolver = "le"
     [http.routers.database]
-      rule = "Host(`database.socialcomprehend.com`)"
+      rule = "Host(`database.hantswilliams.com`)"
       service = "database"
       [http.routers.database.tls]
         certResolver = "le"
@@ -38,10 +38,10 @@
   [http.services]
     [http.services.socialcomprehend.loadBalancer]
       [[http.services.socialcomprehend.loadBalancer.servers]]
-        url = "http://64.34.32.1212:80"
+        url = "http://35.194.42.230:80"
     [http.services.api.loadBalancer]
       [[http.services.api.loadBalancer.servers]]
-        url = "http://46.64.54.121:3000"
+        url = "http://34.170.61.70:80"
     [http.services.database.loadBalancer]
       [[http.services.database.loadBalancer.servers]]
-        url = "http://43.63.53.121:5432"
+        url = "http://34.170.61.70:80"
