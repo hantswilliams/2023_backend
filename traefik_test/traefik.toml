@@ -1,6 +1,9 @@
 [global]
   checkNewVersion = true
 
+[log]
+  level = "DEBUG"
+
 [entryPoints]
   [entryPoints.http]
   address = ":80"
