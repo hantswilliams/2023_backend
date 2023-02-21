@@ -1,0 +1,47 @@
+[global]
+  checkNewVersion = true
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+  [entryPoints.https]
+  address = ":443"
+
+[api]
+  dashboard = true
+
+[providers]
+  [providers.docker]
+    exposedByDefault = false
+  [providers.file]
+    filename = "/etc/traefik/dynamic.yml"
+    watch = true
+
+[http]
+  [http.routers]
+    [http.routers.socialcomprehend]
+      rule = "Host(`socialcomprehend.com`)"
+      service = "socialcomprehend"
+      [http.routers.socialcomprehend.tls]
+        certResolver = "le"
+    [http.routers.api]
+      rule = "Host(`api.socialcomprehend.com`)"
+      service = "api"
+      [http.routers.api.tls]
+        certResolver = "le"
+    [http.routers.database]
+      rule = "Host(`database.socialcomprehend.com`)"
+      service = "database"
+      [http.routers.database.tls]
+        certResolver = "le"
+
+  [http.services]
+    [http.services.socialcomprehend.loadBalancer]
+      [[http.services.socialcomprehend.loadBalancer.servers]]
+        url = "http://64.34.32.1212:80"
+    [http.services.api.loadBalancer]
+      [[http.services.api.loadBalancer.servers]]
+        url = "http://46.64.54.121:3000"
+    [http.services.database.loadBalancer]
+      [[http.services.database.loadBalancer.servers]]
+        url = "http://43.63.53.121:5432"
