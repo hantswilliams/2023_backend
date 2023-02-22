@@ -37,6 +37,7 @@ providers:
     directory: /etc/traefik
     watch: true
 
+
 # HTTP routers configuration
 
 # linting: disable=yaml.schema
