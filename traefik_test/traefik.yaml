@@ -33,7 +33,7 @@ http:
       service: "service-2"
     router-3:
       rule: "Host(`traefik.hantswilliams.com`)"
-      service: "api@internal"
+      service: "service-3@internal"
 
   # HTTP services configuration
   services:
