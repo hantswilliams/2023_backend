@@ -28,7 +28,7 @@ certificatesResolvers:
       storage: "/etc/traefik/acme.json"
       httpChallenge:
         entryPoint: web
-      
+
 # Providers configuration
 providers:
   docker:
@@ -50,7 +50,6 @@ http:
         - "web"
         - "websecure"
 
-
     router-2:
       rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
@@ -60,7 +59,6 @@ http:
         - "web"
         - "websecure"
 
-
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
@@ -68,20 +66,6 @@ http:
         certResolver: "letsencrypt"
       entryPoints:
         - "web"
-
-  # HTTP middlewares configuration
-  # HTTP middlewares configuration
-  # middlewares:
-  #   redirect-to-https:
-  #     redirectScheme:
-  #       scheme: https
-  #       permanent: true
-  #   redirect-to-www:
-  #     redirectRegex:
-  #       regex: "^https?://hantswilliams.com(.*)"
-  #       replacement: "https://www.hantswilliams.com${1}"
-  #       permanent: true
-    
 
   # HTTP services configuration
   services:

@@ -32,32 +32,35 @@ providers:
 http:
 
   routers:
+
     router-1:
-      rule: "Host(`hantswilliams.com`)"
-      service: "service-1"
-      entryPoints:
-        - "web"
-
-    router-2:
-      rule: "Host(`subdomain.hantswilliams.com`)"
-      service: "service-2"
-      entryPoints:
-        - "web"
-
-    router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
       entryPoints:
         - "web"
 
+    router-2:
+      rule: "Host(`hantswilliams.com`)"
+      service: "service-1"
+      entryPoints:
+        - "web"
+
+    router-3:
+      rule: "Host(`subdomain.hantswilliams.com`)"
+      service: "service-2"
+      entryPoints:
+        - "web"
+
+
+
   # HTTP services configuration
   services:
-    service-1:
+    service-2:
       loadBalancer:
         servers:
           - url: "http://34.171.76.221:80"
       
-    service-2:
+    service-3:
       loadBalancer:
         servers:
           - url: "http://34.170.61.70:80"
