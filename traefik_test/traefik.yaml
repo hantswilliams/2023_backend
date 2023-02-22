@@ -17,17 +17,6 @@ log:
 entryPoints:
   web:
     address: ":80"
-  # dashboard:
-  #   address: ":8080"
-
-# Middlewares configuration
-# set up auth
-middlewares:
-  auth:
-    basicAuth:
-      users:
-        - "admin:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/"
-        - "user:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"
 
 # Providers configuration
 providers:
@@ -49,8 +38,6 @@ http:
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
-      middlewares:
-        - "auth"
       entryPoints:
         - "web"
 
