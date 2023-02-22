@@ -10,7 +10,8 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./letsencrypt:/etc/letsencrypt"
+      - "./traefik.toml:/etc/traefik/traefik.toml"
+      - "./certs:/etc/traefik/acme.json"
 
     command:
       - "--providers.docker=true"
