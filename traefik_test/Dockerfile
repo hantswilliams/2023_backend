@@ -1,8 +1,8 @@
-FROM traefik:v2.3
+# Use the official Traefik image as the base image
+FROM traefik:v2.9
 
-# Copy the Traefik configuration file to the container
-COPY traefik.toml /etc/traefik/traefik.toml
+# Copy the Traefik configuration file into the container
+COPY traefik.yaml /etc/traefik/traefik.yaml
 
-# Expose port 80 and 443
-EXPOSE 80
-EXPOSE 443
+# Expose the ports for the Traefik dashboard and API
+EXPOSE 8080 8081
