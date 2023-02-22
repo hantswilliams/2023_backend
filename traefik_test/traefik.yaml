@@ -17,8 +17,8 @@ log:
 entryPoints:
   web:
     address: ":80"
-  dashboard:
-    address: ":8080"
+  # dashboard:
+  #   address: ":8080"
 
 # Providers configuration
 providers:
