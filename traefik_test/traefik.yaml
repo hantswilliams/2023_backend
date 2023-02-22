@@ -33,7 +33,7 @@ http:
       service: "service-2"
     router-3:
       rule: "Host(`traefik.hantswilliams.com`)"
-      service: "service-3@internal"
+      service: "service-3"
 
   # HTTP services configuration
   services:
@@ -48,7 +48,7 @@ http:
     service-3:
       loadBalancer:
         servers:
-          - url: "http://traefik:8080"
+          - url: "http://reverse-proxy:8080"
     
 
 
