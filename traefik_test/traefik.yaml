@@ -17,7 +17,7 @@ entryPoints:
 certificatesResolvers:
   myresolver:
     acme:
-      email: hantsawilliams@gmail.com.com
+      email: hantsawilliams@gmail.com
       storage: acme.json
       httpChallenge:
         entryPoint: http
@@ -48,16 +48,16 @@ http:
         - "https"
 
   # Services
-    services:
-      app1:
-        loadBalancer:
-          servers:
-            - url: "http:/34.171.76.221:80"
-      app2:
-        loadBalancer:
-          servers:
-            - url: "http://34.170.61.70:80"
-      app3:
-        loadBalancer:
-          servers:
-            - url: "http://35.194.42.230:80"
+  services:
+    app1:
+      loadBalancer:
+        servers:
+          - url: "http:/34.171.76.221:80"
+    app2:
+      loadBalancer:
+        servers:
+          - url: "http://34.170.61.70:80"
+    app3:
+      loadBalancer:
+        servers:
+          - url: "http://35.194.42.230:80"
