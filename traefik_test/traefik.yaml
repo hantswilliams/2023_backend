@@ -3,6 +3,12 @@ global:
   checkNewVersion: true
   sendAnonymousUsage: true
 
+# API and dashboard configuration
+api:
+  dashboard: true
+  insecure: true
+  debug: true
+
 # Logging configuration
 log:
   level: DEBUG
