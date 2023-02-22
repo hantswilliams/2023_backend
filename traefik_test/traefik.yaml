@@ -49,24 +49,20 @@ http:
       entryPoints:
         - "web"
         - "websecure"
-      middlewares:
-        - redirect-to-https
-        - redirect-to-www
+
 
     router-2:
-      rule: "Host(`subdomain.hantswilliams.com`)"
+      rule: "Host(`subdomain.hantswilliams.com`) || Host(`www.subdomain.hantswilliams.com`)"
       service: "service-2"
       tls:
         certResolver: "letsencrypt"
       entryPoints:
         - "web"
         - "websecure"
-      middlewares:
-        - redirect-to-https
-        - redirect-to-www
+
 
     router-3:
-      rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
+      rule: "Host(`traefik.hantswilliams.com`) || Host(`www.traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
       tls:
         certResolver: "letsencrypt"
@@ -75,16 +71,16 @@ http:
 
   # HTTP middlewares configuration
   # HTTP middlewares configuration
-  middlewares:
-    redirect-to-https:
-      redirectScheme:
-        scheme: https
-        permanent: true
-    redirect-to-www:
-      redirectRegex:
-        regex: "^https?://hantswilliams.com(.*)"
-        replacement: "https://www.hantswilliams.com${1}"
-        permanent: true
+  # middlewares:
+  #   redirect-to-https:
+  #     redirectScheme:
+  #       scheme: https
+  #       permanent: true
+  #   redirect-to-www:
+  #     redirectRegex:
+  #       regex: "^https?://hantswilliams.com(.*)"
+  #       replacement: "https://www.hantswilliams.com${1}"
+  #       permanent: true
     
 
   # HTTP services configuration
