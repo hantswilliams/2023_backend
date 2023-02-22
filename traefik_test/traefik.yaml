@@ -29,14 +29,6 @@ providers:
 # HTTP routers configuration
 http:
 
-  middlewares:
-    test-auth:
-      basicAuth:
-        users:
-          - "test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/"
-          - "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"
-
-
   routers:
     router-1:
       rule: "Host(`hantswilliams.com`)"
@@ -49,8 +41,6 @@ http:
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
-      middlewares:
-        - test-auth
       entryPoints:
         - "web"
 
