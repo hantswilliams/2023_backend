@@ -7,6 +7,11 @@
 - Should also think about a simple node server for doing other API calls to DB - e.g., there is the prisma client there, but the issue is the prisma client does not help with autogenerating API endpoint documentation like postgrest does 
 - Traefik for managing reverse proxy/routing 
     - need to still go through a tutorial like this to figure out best way for routing multiple services
+
+
+        https://github.com/traefik/traefik/issues/9565 
+
+
         - https://graspingtech.com/docker-compose-traefik/ 
         - https://stackoverflow.com/questions/58945381/cant-get-multiple-services-running-behind-traefik-on-the-same-host 
         - https://stackoverflow.com/questions/60849312/multiple-docker-compose-files-with-traefik-v2-1-and-database-networks 
