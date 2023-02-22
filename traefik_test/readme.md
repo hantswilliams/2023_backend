@@ -36,3 +36,7 @@ Name: (leave blank for root domain)
 Domain: hantswilliams.com
 Type: CAA
 Value: 0 issue "letsencrypt.org"
+
+
+
+sudo docker run -p 80:80 -p 443:443 -v /var/run/docker.sock:/var/run/docker.sock -v $PWD/traefik.yaml:/etc/traefik/traefik.yaml -v $PWD/acme.json:/acme.json traefik
