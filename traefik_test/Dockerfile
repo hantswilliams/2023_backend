@@ -1,5 +1,5 @@
 # Use the official Traefik image as the base image
-FROM traefik:v2.4
+FROM traefik:v2.9
 
 # Copy the Traefik configuration file into the container
 COPY traefik.yaml /etc/traefik/traefik.yaml
