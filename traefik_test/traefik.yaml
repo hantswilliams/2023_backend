@@ -52,7 +52,7 @@ http:
 
 
     router-2:
-      rule: "Host(`subdomain.hantswilliams.com`) || Host(`www.subdomain.hantswilliams.com`)"
+      rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
       tls:
         certResolver: "letsencrypt"
@@ -62,7 +62,7 @@ http:
 
 
     router-3:
-      rule: "Host(`traefik.hantswilliams.com`) || Host(`www.traefik.hantswilliams.com`) && Path(`/`)"
+      rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
       tls:
         certResolver: "letsencrypt"
