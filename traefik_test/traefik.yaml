@@ -29,7 +29,6 @@ certificatesResolvers:
       httpChallenge:
         entryPoint: web
       
-
 # Providers configuration
 providers:
   docker:
@@ -43,7 +42,7 @@ http:
 
   routers:
     router-1:
-      rule: "Host(`hantswilliams.com`)"
+      rule: "Host(`hantswilliams.com`) || Host(`www.hantswilliams.com`)"
       service: "service-1"
       tls:
         certResolver: "letsencrypt"
@@ -52,6 +51,7 @@ http:
         - "websecure"
       middlewares:
         - redirect-to-https
+        - redirect-to-www
 
     router-2:
       rule: "Host(`subdomain.hantswilliams.com`)"
@@ -63,6 +63,7 @@ http:
         - "websecure"
       middlewares:
         - redirect-to-https
+        - redirect-to-www
 
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
@@ -71,15 +72,18 @@ http:
         certResolver: "letsencrypt"
       entryPoints:
         - "web"
-        - "websecure"
-      middlewares:
-        - redirect-to-https
 
+  # HTTP middlewares configuration
   # HTTP middlewares configuration
   middlewares:
     redirect-to-https:
       redirectScheme:
         scheme: https
+        permanent: true
+    redirect-to-www:
+      redirectRegex:
+        regex: "^https?://hantswilliams.com(.*)"
+        replacement: "https://www.hantswilliams.com${1}"
         permanent: true
     
 
