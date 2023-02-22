@@ -31,7 +31,9 @@ http:
     router-2:
       rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
-
+    router-3:
+      rule: "Host(`traefik.hantswilliams.com`)"
+      service: "api@internal"
 
   # HTTP services configuration
   services:
@@ -43,5 +45,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://34.170.61.70:80"
+    
 
 
