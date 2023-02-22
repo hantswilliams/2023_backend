@@ -38,6 +38,9 @@ providers:
     watch: true
 
 # HTTP routers configuration
+
+# linting: disable=yaml.schema
+# yaml-ls: disable=SCHEMA_VALIDATION
 http:
 
   routers:
