@@ -20,16 +20,6 @@ entryPoints:
   websecure:
     address: ":443"
 
-# Certificates resolvers configuration
-certificatesResolvers:
-  letsencrypt:
-    acme:
-      email: "hantsawilliams@gmail.com"
-      storage: "/etc/traefik/acme.json"
-      httpChallenge:
-        entryPoint: web
-      
-
 # Providers configuration
 providers:
   docker:
@@ -45,43 +35,20 @@ http:
     router-1:
       rule: "Host(`hantswilliams.com`)"
       service: "service-1"
-      tls:
-        certResolver: "letsencrypt"
       entryPoints:
         - "web"
-        - "websecure"
-      middlewares:
-        - redirect-to-https
 
     router-2:
       rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
-      tls:
-        certResolver: "letsencrypt"
       entryPoints:
         - "web"
-        - "websecure"
-      middlewares:
-        - redirect-to-https
 
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
-      tls:
-        certResolver: "letsencrypt"
       entryPoints:
         - "web"
-        - "websecure"
-      middlewares:
-        - redirect-to-https
-
-  # HTTP middlewares configuration
-  middlewares:
-    redirect-to-https:
-      redirectScheme:
-        scheme: https
-        permanent: true
-    
 
   # HTTP services configuration
   services:
