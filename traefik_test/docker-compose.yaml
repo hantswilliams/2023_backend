@@ -1,22 +1,27 @@
-version: '3'
+version: '3.8'
 
 services:
   traefik:
-    image: 
-      build: .
-    container_name: traefik
-    # command:
-    #   - "--api.insecure=true"
-    #   - "--providers.docker=true"
-    #   - "--providers.docker.exposedbydefault=false"
-    #   - "--entrypoints.web.address=:80"
-    #   - "--entrypoints.websecure.address=:443"
+    image: traefik:v2.5
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=hantsawilliams@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080"
-      - "8081:8081"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik.yaml:/etc/traefik/traefik.yaml"
-      - "./acme.json:/etc/traefik/acme.json"
+      - "./letsencrypt:/letsencrypt"
+    networks:
+      my-network:
+        aliases:
+          - traefik
+
+networks:
+  my-network:
