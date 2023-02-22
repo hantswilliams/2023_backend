@@ -37,8 +37,8 @@ http:
     service-1:
       loadBalancer:
         servers:
-          - url: "http://34.171.76.221"
+          - url: "http://34.171.76.221:80"
     service-2:
       loadBalancer:
         servers:
-          - url: "http://22.222.222.22"
+          - url: "http://22.222.222.22:80"
