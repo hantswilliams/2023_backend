@@ -31,9 +31,7 @@ http:
     router-2:
       rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
-    dashboard:
-      rule: "PathPrefix(`/api`)"
-      service: "api@internal"
+
 
   # HTTP services configuration
   services:
@@ -45,7 +43,5 @@ http:
       loadBalancer:
         servers:
           - url: "http://34.170.61.70:80"
-    api:
-      dashboard:
-        true
+
 
