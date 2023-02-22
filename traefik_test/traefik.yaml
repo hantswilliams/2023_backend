@@ -13,14 +13,10 @@ api:
 log:
   level: DEBUG
 
-
-
 # Entry points configuration
 entryPoints:
   web:
     address: ":80"
-  websecure:
-    address: ":443"
 
 # Providers configuration
 providers:
