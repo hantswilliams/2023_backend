@@ -17,6 +17,8 @@ log:
 entryPoints:
   web:
     address: ":80"
+  websecure:
+    address: ":443"
 
 # Providers configuration
 providers:
@@ -29,14 +31,48 @@ providers:
 # HTTP routers configuration
 http:
 
+  # Enable ACME and configure Let's Encrypt as the provider
+  certificateresolvers:
+    letsencrypt:
+      acme:
+        email: hantsawilliams@example.com
+        storage: acme.json
+        httpChallenge:
+          entryPoint: http
+      tlsChallenge: {}
+
+  # Configure the HTTPS server
+  tls:
+    options:
+      default:
+        minVersion: VersionTLS12
+        sniStrict: true
+    certificatesResolvers:
+      letsencrypt:
+        acme:
+          email: hantsawilliams@gmail.com
+          storage: acme.json
+          httpChallenge:
+            entryPoint: http
+        tlsChallenge: {}
+
   routers:
     router-1:
       rule: "Host(`hantswilliams.com`)"
       service: "service-1"
+      entryPoints:
+        - "websecure"
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: "hantswilliams.com"
+            sans:
+              - "*.hantswilliams.com"
 
     router-2:
       rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
+
 
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
