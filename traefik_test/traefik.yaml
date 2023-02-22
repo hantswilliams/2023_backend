@@ -45,6 +45,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://34.170.61.70:80"
+    service-3:
+      loadBalancer:
+        servers:
+          - url: "http://traefik:8080"
     
 
 
