@@ -29,7 +29,7 @@ http:
       rule: "Host(`hantswilliams.com`)"
       service: "service-1"
     router-2:
-      rule: "Host(`sub1.hantswilliams.com`)"
+      rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
 
   # HTTP services configuration
