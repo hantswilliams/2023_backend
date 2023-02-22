@@ -13,15 +13,7 @@ api:
 log:
   level: DEBUG
 
-# Certificate resolvers configuration
-certificatesResolvers:
-  letsencrypt:
-    acme:
-      email: "hantsawilliams@gmail.com"
-      storage: "/etc/traefik/acme.json"
-      httpChallenge:
-        entryPoint: "web"
-      tlsChallenge: {}
+
 
 # Entry points configuration
 entryPoints:
@@ -44,27 +36,19 @@ http:
     router-1:
       rule: "Host(`hantswilliams.com`)"
       service: "service-1"
-      entryPoints:
-        - "websecure"
+
     router-2:
       rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
-      entryPoints:
-        - "websecure"
+
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
       entryPoints:
         - "web"
-        - "websecure"
-      middlewares:
-        - "traefik-https-redirect"
 
-  # HTTP middlewares configuration
-  middlewares:
-    traefik-https-redirect:
-      redirectScheme:
-        scheme: "https"
+
+
 
   # HTTP services configuration
   services:
