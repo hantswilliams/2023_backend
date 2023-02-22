@@ -10,7 +10,7 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro" 
-      - - "./certs/acme.json:/etc/traefik/acme.json:rw"
+      - "./certs/acme.json:/etc/traefik/acme.json:rw"
 
     command:
       - "--providers.docker=true"
