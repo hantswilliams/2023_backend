@@ -29,35 +29,34 @@ certificatesResolvers:
             - "*.hantswilliams.com"
 
 # Routers
-http:
-  routers:
-    app1:
-      rule: "Host(`hantswilliams.com`)"
-      service: "app1"
-      entryPoints:
-        - "https"
-    app2:
-      rule: "Host(`sub1.hantswilliams.com`)"
-      service: "app2"
-      entryPoints:
-        - "https"
-    app3:
-      rule: "Host(`sub2.hantswilliams.com`)"
-      service: "app3"
-      entryPoints:
-        - "https"
+routers:
+  app1:
+    rule: "Host(`hantswilliams.com`)"
+    service: "app1"
+    entryPoints:
+      - "https"
+  app2:
+    rule: "Host(`sub1.hantswilliams.com`)"
+    service: "app2"
+    entryPoints:
+      - "https"
+  app3:
+    rule: "Host(`sub2.hantswilliams.com`)"
+    service: "app3"
+    entryPoints:
+      - "https"
 
-  # Services
-  services:
-    app1:
-      loadBalancer:
-        servers:
-          - url: "http:/34.171.76.221:80"
-    app2:
-      loadBalancer:
-        servers:
-          - url: "http://34.170.61.70:80"
-    app3:
-      loadBalancer:
-        servers:
-          - url: "http://35.194.42.230:80"
+# Services
+services:
+  app1:
+    loadBalancer:
+      servers:
+        - url: "http://23.32.352.32"
+  app2:
+    loadBalancer:
+      servers:
+        - url: "http://53.34.232.64"
+  app3:
+    loadBalancer:
+      servers:
+        - url: "http://64.34.232.53"
