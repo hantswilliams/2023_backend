@@ -51,6 +51,12 @@ http:
       entryPoints:
         - "web"
 
+    router-4:
+      rule: "Host(`subdomain2.hantswilliams.com`) && PathPrefix(`/dashboard/`)"
+      service: "service-4"
+      entryPoints:
+        - "web"
+
 
   # HTTP services configuration
   services:
@@ -63,6 +69,11 @@ http:
       loadBalancer:
         servers:
           - url: "http://34.170.61.70:80"
+
+    service-4:
+      loadBalancer:
+        servers:
+          - url: "http://35.194.42.230:80"
 
 
 
