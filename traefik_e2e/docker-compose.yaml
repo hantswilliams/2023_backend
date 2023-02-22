@@ -10,8 +10,8 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      # - "./traefik.toml:/etc/traefik/traefik.toml" #this is covered now in the dockerfile
-      - "./certs:/etc/traefik/acme.json"
+      - "./traefik.toml:/etc/traefik/traefik.toml" #this is covered now in the dockerfile
+      - "./certs:/etc/traefik/acme.json:rw"
 
     command:
       - "--providers.docker=true"
