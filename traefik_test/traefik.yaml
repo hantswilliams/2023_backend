@@ -22,10 +22,10 @@ http:
   routers:
     router-1:
       rule: "Host(`hantswilliams.com`)"
-      service: "service-1@external"
+      service: "service-1"
     router-2:
       rule: "Host(`22.222.222.22`)"
-      service: "service-2@external"
+      service: "service-2"
 
   # HTTP services configuration
   services:
