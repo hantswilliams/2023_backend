@@ -1,62 +1,39 @@
 # Global configuration
 global:
-  checkNewVersion: false
+  checkNewVersion: true
+  sendAnonymousUsage: true
 
-# API and dashboard configuration
-api:
-  dashboard: true
+# Logging configuration
+log:
+  level: DEBUG
 
-# Entry points
+# Entry points configuration
 entryPoints:
-  http:
+  web:
     address: ":80"
-  https:
-    address: ":443"
 
-# HTTPS configuration
-certificatesResolvers:
-  myresolver:
-    acme:
-      email: hantsawilliams@gmail.com
-      storage: acme.json
-      httpChallenge:
-        entryPoint: http
-      tlsChallenge:
-        entryPoint: http
-      domains:
-        - main: hantswilliams.com
-          sans:
-            - "*.hantswilliams.com"
+# Providers configuration
+providers:
+  docker:
+    exposedByDefault: false
 
-# Routers
-routers:
-  app1:
-    rule: "Host(`hantswilliams.com`)"
-    service: "app1"
-    entryPoints:
-      - "https"
-  app2:
-    rule: "Host(`sub1.hantswilliams.com`)"
-    service: "app2"
-    entryPoints:
-      - "https"
-  app3:
-    rule: "Host(`sub2.hantswilliams.com`)"
-    service: "app3"
-    entryPoints:
-      - "https"
+# HTTP routers configuration
+http:
+  routers:
+    router-1:
+      rule: "Host(`11.111.11.111`)"
+      service: "service-1@external"
+    router-2:
+      rule: "Host(`22.222.222.22`)"
+      service: "service-2@external"
 
-# Services
-services:
-  app1:
-    loadBalancer:
-      servers:
-        - url: "http://23.32.352.32"
-  app2:
-    loadBalancer:
-      servers:
-        - url: "http://53.34.232.64"
-  app3:
-    loadBalancer:
-      servers:
-        - url: "http://64.34.232.53"
+  # HTTP services configuration
+  services:
+    service-1:
+      loadBalancer:
+        servers:
+          - url: "http://11.111.11.111"
+    service-2:
+      loadBalancer:
+        servers:
+          - url: "http://22.222.222.22"

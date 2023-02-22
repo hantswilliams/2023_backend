@@ -1,15 +1,9 @@
-version: "3.3"
-
+version: "3.9"
 services:
-
-  traefik:
-    image: "traefik:v2.9"
-    container_name: "traefik"
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
+  reverse-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "80:80"
       - "8080:8080"
