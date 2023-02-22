@@ -11,11 +11,16 @@ log:
 entryPoints:
   web:
     address: ":80"
+  dashboard:
+    address: ":8080"
 
 # Providers configuration
 providers:
   docker:
     exposedByDefault: false
+  file:
+    directory: /etc/traefik
+    watch: true
 
 # HTTP routers configuration
 http:
