@@ -29,7 +29,7 @@ http:
       rule: "Host(`hantswilliams.com`)"
       service: "service-1"
     router-2:
-      rule: "Host(`22.222.222.22`)"
+      rule: "Host(`sub1.hantswilliams.com`)"
       service: "service-2"
 
   # HTTP services configuration
@@ -41,4 +41,4 @@ http:
     service-2:
       loadBalancer:
         servers:
-          - url: "http://22.222.222.22:80"
+          - url: "http://34.170.61.70:80"
