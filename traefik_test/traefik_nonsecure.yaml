@@ -34,20 +34,20 @@ http:
   routers:
 
     router-1:
-      rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
-      service: "api@internal"
-      entryPoints:
-        - "web"
-
-    router-2:
       rule: "Host(`hantswilliams.com`)"
       service: "service-1"
       entryPoints:
         - "web"
 
-    router-3:
+    router-2:
       rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
+      entryPoints:
+        - "web"
+
+    router-3:
+      rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
+      service: "api@internal"
       entryPoints:
         - "web"
 

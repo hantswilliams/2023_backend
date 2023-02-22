@@ -41,25 +41,9 @@ providers:
 http:
 
   routers:
+
+    # traefik dashboard
     router-1:
-      rule: "Host(`hantswilliams.com`) || Host(`www.hantswilliams.com`)"
-      service: "service-1"
-      tls:
-        certResolver: "letsencrypt"
-      entryPoints:
-        - "web"
-        - "websecure"
-
-    router-2:
-      rule: "Host(`subdomain.hantswilliams.com`)"
-      service: "service-2"
-      tls:
-        certResolver: "letsencrypt"
-      entryPoints:
-        - "web"
-        - "websecure"
-
-    router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
       tls:
@@ -67,17 +51,52 @@ http:
       entryPoints:
         - "web"
 
+    # flask app #1 - main/root page 
+    router-2:
+      rule: "Host(`hantswilliams.com`) || Host(`www.hantswilliams.com`)"
+      service: "service-2"
+      tls:
+        certResolver: "letsencrypt"
+      entryPoints:
+        - "web"
+        - "websecure"
+
+    # flask app #2 - subdomain 1 
+    router-3:
+      rule: "Host(`subdomain.hantswilliams.com`)"
+      service: "service-3"
+      tls:
+        certResolver: "letsencrypt"
+      entryPoints:
+        - "web"
+        - "websecure"
+
+    # flask app #3 - subdomain 2
+    router-4:
+      rule: "Host(`subdomain2.hantswilliams.com`)"
+      service: "service-4"
+      tls:
+        certResolver: "letsencrypt"
+      entryPoints:
+        - "web"
+        - "websecure"
+
   # HTTP services configuration
   services:
-    service-1:
+    service-2:
       loadBalancer:
         servers:
           - url: "http://34.171.76.221:80"
       
-    service-2:
+    service-3:
       loadBalancer:
         servers:
           - url: "http://34.170.61.70:80"
+
+    service-4:
+      loadBalancer:
+        servers:
+          - url: "http://35.194.42.230:80"
 
 
 
