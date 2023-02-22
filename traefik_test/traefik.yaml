@@ -33,7 +33,7 @@ http:
       service: "service-2"
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
-      service: "service-3"
+      service: "api@internal"
       entryPoints:
         - "web"
 
@@ -47,9 +47,7 @@ http:
       loadBalancer:
         servers:
           - url: "http://34.170.61.70:80"
-    service-3:
-      dashboard:
-        true
+
     
 
 
