@@ -32,8 +32,10 @@ http:
       rule: "Host(`subdomain.hantswilliams.com`)"
       service: "service-2"
     router-3:
-      rule: "Host(`traefik.hantswilliams.com`)"
-      service: "service-3@docker"
+      rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
+      service: "service-3"
+      entryPoints:
+        - "web"
 
   # HTTP services configuration
   services:
@@ -46,11 +48,8 @@ http:
         servers:
           - url: "http://34.170.61.70:80"
     service-3:
-      loadBalancer:
-        servers:
-          - url: "http://reverse-proxy:8080"
-      passHostHeader: true
-
+      dashboard:
+        true
     
 
 
