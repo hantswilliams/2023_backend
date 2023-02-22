@@ -3,7 +3,7 @@ services:
   reverse-proxy:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile # to jump into container use ash instead of bin/bash
     ports:
       - "80:80"
       - "443:443"
