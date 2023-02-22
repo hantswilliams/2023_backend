@@ -38,7 +38,6 @@ http:
     router-3:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
-      middlewares: ["dashboard-auth"]
       entryPoints:
         - "web"
 
@@ -53,16 +52,7 @@ http:
         servers:
           - url: "http://34.170.61.70:80"
 
-  # HTTP middlewares configuration
-  middlewares:
-    dashboard-auth:
-      basicAuth:
-        users:
-          - "admin:46566656"
-  middlewaresChain:
-    dashboard:
-      middlewares:
-        - dashboard-auth
+
 
     
 
