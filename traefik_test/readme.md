@@ -38,5 +38,7 @@ Type: CAA
 Value: 0 issue "letsencrypt.org"
 
 
-
-sudo docker run -p 80:80 -p 443:443 -v /var/run/docker.sock:/var/run/docker.sock -v $PWD/traefik.yaml:/etc/traefik/traefik.yaml -v $PWD/acme.json:/acme.json traefik
+1) docker build -t traefik
+2) docker network create web
+3) --> below: 
+sudo docker run -p 80:80 -p 443:443 -v /var/run/docker.sock:/var/run/docker.sock -v $PWD/traefik.toml:/etc/traefik/traefik.toml -v $PWD/acme.json:/acme.json --network web --name traefik traefik

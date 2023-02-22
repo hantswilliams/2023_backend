@@ -1,8 +1,8 @@
 [global]
-  checkNewVersion = true
+checkNewVersion = false
 
-[log]
-  level = "DEBUG"
+[api]
+dashboard = true
 
 [entryPoints]
   [entryPoints.http]
@@ -10,41 +10,43 @@
   [entryPoints.https]
   address = ":443"
 
-[api]
-  dashboard = true
-
 [providers]
   [providers.docker]
-    exposedByDefault = false
-  [providers.file]
-    filename = "/etc/traefik/dynamic_conf.toml"
-    watch = true
+  exposedByDefault = false
+  endpoint = "unix:///var/run/docker.sock"
 
-[http]
-  [http.routers]
-    [http.routers.socialcomprehend]
-      rule = "Host(`hantswilliams.com`)"
-      service = "socialcomprehend"
-      [http.routers.socialcomprehend.tls]
-        certResolver = "le"
-    [http.routers.api]
-      rule = "Host(`api.hantswilliams.com`)"
-      service = "api"
-      [http.routers.api.tls]
-        certResolver = "le"
-    [http.routers.database]
-      rule = "Host(`database.hantswilliams.com`)"
-      service = "database"
-      [http.routers.database.tls]
-        certResolver = "le"
+[certificatesResolvers.myresolver.acme]
+email = "hantsawilliams@gmail.com"
+storage = "acme.json"
+[certificatesResolvers.myresolver.acme.httpChallenge]
+entryPoint = "http"
+[certificatesResolvers.myresolver.acme.tlsChallenge]
+entryPoint = "http"
+[[certificatesResolvers.myresolver.acme.domains]]
+main = "hantswilliams.com"
+sans = ["*.hantswilliams.com"]
 
-  [http.services]
-    [http.services.socialcomprehend.loadBalancer]
-      [[http.services.socialcomprehend.loadBalancer.servers]]
-        url = "http:/34.171.76.221:80"
-    [http.services.api.loadBalancer]
-      [[http.services.api.loadBalancer.servers]]
-        url = "http://34.170.61.70:80"
-    [http.services.database.loadBalancer]
-      [[http.services.database.loadBalancer.servers]]
-        url = "http://35.194.42.230:80"
+[http.routers]
+  [http.routers.app1]
+  rule = "Host(`hantswilliams.com`)"
+  service = "app1"
+  entryPoints = ["https"]
+  [http.routers.app2]
+  rule = "Host(`sub1.hantswilliams.com`)"
+  service = "app2"
+  entryPoints = ["https"]
+  [http.routers.app3]
+  rule = "Host(`sub2.hantswilliams.com`)"
+  service = "app3"
+  entryPoints = ["https"]
+
+[http.services]
+  [http.services.app1.loadBalancer]
+  [[http.services.app1.loadBalancer.servers]]
+  url = "http://34.171.76.221:80"
+  [http.services.app2.loadBalancer]
+  [[http.services.app2.loadBalancer.servers]]
+  url = "http://34.170.61.70:80"
+  [http.services.app3.loadBalancer]
+  [[http.services.app3.loadBalancer.servers]]
+  url = "http://35.194.42.230:80"
