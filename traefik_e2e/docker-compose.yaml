@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 services:
   reverse-proxy:
     build:
@@ -10,7 +10,6 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro" 
-      - "./certs/:/etc/ssl/:ro"
       - "./acme.json:/etc/traefik/acme.json"
     command:
       - "--providers.docker=true"
