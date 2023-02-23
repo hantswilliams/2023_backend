@@ -50,8 +50,6 @@ http:
     router-1:
       rule: "Host(`traefik.hantswilliams.com`) && Path(`/`)"
       service: "api@internal"
-      tls:
-        certResolver: "letsencrypt"
       entryPoints:
         - "web"
 

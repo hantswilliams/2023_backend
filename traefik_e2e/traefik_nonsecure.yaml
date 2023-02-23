@@ -40,7 +40,7 @@ http:
         - "web"
 
     router-2:
-      rule: "Host(`subdomain.hantswilliams.com`)"
+      rule: "Host(`app1.hantswilliams.com`)"
       service: "service-2"
       entryPoints:
         - "web"
@@ -52,7 +52,7 @@ http:
         - "web"
 
     router-4:
-      rule: "Host(`subdomain2.hantswilliams.com`) && PathPrefix(`/dashboard/`)"
+      rule: "Host(`app2.hantswilliams.com`) && PathPrefix(`/dashboard/`)"
       service: "service-4"
       entryPoints:
         - "web"
