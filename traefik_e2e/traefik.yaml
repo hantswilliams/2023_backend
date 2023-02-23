@@ -59,15 +59,12 @@ http:
     router-2:
       rule: "Host(`hantswilliams.com`) || Host(`www.hantswilliams.com`)"
       service: "service-2"
-      tls:
-        certResolver: "letsencrypt"
       entryPoints:
         - "web"
-        - "websecure"
 
     # flask app #2 - subdomain 1 
     router-3:
-      rule: "Host(`subdomain.hantswilliams.com`)"
+      rule: "Host(`app1.hantswilliams.com`)"
       service: "service-3"
       tls:
         certResolver: "letsencrypt"
@@ -77,7 +74,7 @@ http:
 
     # flask app #3 - subdomain 2
     router-4:
-      rule: "Host(`subdomain2.hantswilliams.com`)"
+      rule: "Host(`app2.hantswilliams.com`)"
       service: "service-4"
       tls:
         certResolver: "letsencrypt"
