@@ -25,7 +25,7 @@ certificatesResolvers:
   letsencrypt:
     acme:
       email: "hantsawilliams@gmail.com"
-      storage: "/etc/traefik/acme.json"
+      storage: "/etc/traefik/acme/acme.json"
       httpChallenge:
         entryPoint: web
 
