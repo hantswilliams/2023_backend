@@ -9,7 +9,22 @@
     - please check out my other github repo: https://github.com/hantswilliams/traefik-reverseproxy-loadbalancer 
     - this should then be installed on some other machine, dedicated load balancer, and using in front of this (quick and simple SSL and routing!!)
 
+## Setup 
+### Example ENV file to be placed within /postgres: 
+```
+POSTGRES_USER=theusernameyouwant
+POSTGRES_PASSWORD=thepasswordyouwant
+POSTGRES_DB=postgres
 
+DB_ANON_ROLE=anon
+DB_SCHEMA=public
+```
+### Example ENV file to be placed within /prisma:
+```
+DATABASE_URL="postgres://USERNAME:PASSWORD@localhost:5432/postgres"
+
+```
+### Instructions:
 - Setup - BACKEND - : 
     - Run the docker-compose file in postgres
     - Then update the prisma.schema to your liking 
